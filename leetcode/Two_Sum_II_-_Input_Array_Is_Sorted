@@ -1,0 +1,16 @@
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& numbers, int target) {
+        int index = numbers.size() - 1;
+        for (int i = 0; i < numbers.size(); i++) {
+            while (i < index && numbers[i] + numbers[index] > target) {
+                index--;
+            }
+            if (numbers[i] + numbers[index] == target) {
+                return {i + 1, index + 1};
+            }
+        }
+        throw std::invalid_argument("Non-correct input data");
+    }
+};
+
