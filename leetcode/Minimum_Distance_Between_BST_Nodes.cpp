@@ -11,22 +11,23 @@
  */
 class Solution {
 public:
-    void dfs(TreeNode* vertex, int &mi, bool &hasPrev, int &prev) {
-        if (vertex == nullptr)
+    void search(TreeNode* vertex, int& minDiff, bool& has_prev, int& prev) {
+        if (vertex == nullptr) {
             return;
-        dfs(vertex -> left, mi, hasPrev, prev);
-        if (hasPrev) {
-            mi = min(mi, vertex -> val - prev);
         }
-        hasPrev = true;
+        search(vertex -> left, minDiff, has_prev, prev);
+        if (has_prev) {
+            minDiff = min(minDiff, vertex -> val - prev);
+        }
+        has_prev = true;
         prev = vertex -> val;
-        dfs(vertex -> right, mi, hasPrev, prev);
+        search(vertex -> right, minDiff, has_prev, prev);
     }
     int minDiffInBST(TreeNode* root) {
+        int minDiff = 2e9;
+        bool has_prev = false;
         int prev = 0;
-        bool hasPrev = false;
-        int mi = 2e9;
-        dfs(root, mi, hasPrev, prev);
-        return mi;
+        search(root, minDiff, has_prev, prev);
+        return minDiff;
     }
 };
